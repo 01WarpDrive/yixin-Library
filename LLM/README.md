@@ -1,5 +1,51 @@
 # LLM
 
+* 全面、通俗的入门教程 [Large Language Model Tutorial Series: 30 Step-by-Step Lessons [FREE\][2024] | by Ayşe Kübra Kuyucu | Tech Talk with ChatGPT | Medium](https://medium.com/tech-talk-with-chatgpt/large-language-model-tutorial-series-30-step-by-step-lessons-free-c8e6114b0c74)
+
+## LLM 概念
+
+* A **large language model (LLM)** is a computational model notable for its ability to **achieve general-purpose language generation and other natural language processing tasks** such as classification. Based on language models, LLMs acquire these abilities by **learning statistical relationships from vast amounts of text** during a computationally intensive self-supervised and semi-supervised training process.
+
+  > from [Large language model - Wikipedia](https://en.wikipedia.org/wiki/Large_language_model)
+  >
+  > 在笔者看来，有两点需要明确。
+  >
+  > 1. LLM 从大量文本数据学习统计关系（因此，所有 LLM 表现出的智能如逻辑推理等都是基于大量文本得到的统计关系）
+  > 2. LLM 的主要能力是通用语言生成和其他自然语言处理任务（对于 LLM 在其它任务上的表现分析，都应该联系到 LLM 在通用语言生成、自然语言处理的本职任务）
+
+* LLM 推理的本质是以一种自然的方式生成延续初始提示的新文本。LLM 模型的本质是一个参数众多的神经网络。LLM 学习的本质是习得了自然语言的概率分布。LLM 模型文件的本质是是一个概率数据库，它能够为任何特定的字符以及其上下文相关的字符赋予一定的概率分布。
+
+* LLM 的构建：
+
+  * 预训练：LLM 训练背后的创新在于 Transformer 架构的引入，该架构使模型能够从大量数据中学习，同时保留输入不同部分之间的关键上下文关系。经过大量数据的预训练后，LLM 可以视作一个文档补全器，此时与 ChatGPT 这样的助理人工智能还存在一些区别。
+
+    > 预训练的数据是海量的、高质量的，并且无需标注
+
+  * 微调：基于有标注的指令，对模型进一步训练。这一步后，LLM 补全提示词的方式将会趋近训练数据的风格。
+
+    > 微调的数据通常没有预训练的规模大，并且含有标注。但它们同样需要高质量。
+
+  * RLHF：根据人类反馈进行强化学习。
+
+  * 提示工程：可以仔细设计提示以从模型中获得所需的响应（有时甚至无需微调）。
+
+    > LLM 根据初始提示，选择概率最高后续文本。而提示工程的本质就是通过优化初始提示，让那些期望回答的字符的概率更高，进而引导LLM行为朝着特定结果。
+
+## 语言模型
+
+> 语言模型是 LLM 发展的基础，很多 LLM 的概念都是在语言模型中已有的应用。
+
+* 语言模型是许多自然语言处理（NLP）应用的核心，包括机器翻译、语音识别、文本摘要、问答系统和文本生成等。它们通过预测给定一系列文本中下一个词或词元，从而学习语言的统计规律，例如语法、语义和语用学。
+* 语言模型是一种数学模型，用于为自然语言中的词或词元序列分配概率。这些序列可以是句子、段落或任何文本片段。序列的概率反映了它在自然语言中出现的可能性。
+  * 目标是从大量文本数据中学习语言的统计规律。理解词和词元是如何关联的，如何构成有意义的句子和段落，以及如何传达信息和知识。
+* 语言模型主要分为以下几种：
+  * **N-gram模型**：通过考察序列中前 n-1 个词或词元来预测下一个词或词元的概率。
+    * N-gram模型实现简单，训练迅速，但它们容易受到数据稀疏性和泛化能力不足的影响。数据稀疏性是指训练集中未观察到的词或词元序列，导致这些序列被赋予零概率。泛化能力不足是指 N-gram模型 无法捕捉距离较远的词和词元之间的长期依赖和语义关系。
+  * **循环神经网络（RNN）模型**：RNN通过循环连接一次处理一个词或词元序列，并更新代表模型记忆的隐藏状态。隐藏状态随后用于预测序列中的下一个词或词元。
+    * RNN模型克服了 N-gram模型 的数据稀疏性和泛化能力不足问题，因为它们可以学习任意长度和频率的词或词元序列。它们还可以捕捉长期依赖和词与词元之间的语义关系，因为隐藏状态可以存储整个序列的信息。然而，RNN模型也存在一些缺点，如训练长序列时的梯度消失问题，以及训练和推理的速度较慢。
+  * **卷积神经网络（CNN）模型**：CNN 通过卷积操作对词或词元序列应用滤波器，提取表示语言模式和规律的局部特征。滤波器的大小和形状各异，能够捕捉不同层次和粒度的特征。
+    * CNN模型 同样克服了 N-gram模型 的数据稀疏性和泛化能力不足问题，因为它们可以学习任意长度和频率的词或词元序列。它们还可以捕捉长期依赖和词与词元之间的语义关系，因为滤波器能够覆盖序列的大部分区域。此外，CNN模型 在训练和推理速度上相对于RNN模型具有优势，也更稳定和可靠。
+  * **Transformer 模型**：是最新和最先进的用于语言建模的神经网络。变换器模型使用自注意力机制对词或词元序列进行编码和解码，并应用注意力机制来关注序列中最相关的部分。
 
 ## Transformer
 
